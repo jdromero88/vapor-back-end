@@ -17,19 +17,17 @@ class UsersController < ApplicationController
     # byebug
     user = User.find_by(username: params[:username])
     if user
-<<<<<<< HEAD
       if user.password_digest === params[:password]
         render json: user.to_json
       else
         render json: {message: 'user not found'}
       end
-=======
-      render json: user.to_json
+      # render json: user.to_json
       # if user.password_digest === params[:password]
       # else
       #   render json: {message: 'user not found'}
       # end
->>>>>>> singup
+
     else
       render json: {message: 'user not found'}
     end
