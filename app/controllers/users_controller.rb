@@ -2,14 +2,6 @@ class UsersController < ApplicationController
   def create
     byebug
     user = User.create(user_strong_params)
-    # user = User.create!(username: params[:username],
-    #   password: params[:password],
-    #   email: params[:email],
-    #   first_name: params[:first_name],
-    #   last_name: params[:last_name],
-    #   birthdate: params[:birthdate],
-    #   bio: params[:bio],
-    #   user_avatar: params[:user_avatar])
     render json: user.to_json(serialized_data)
   end
   def index
