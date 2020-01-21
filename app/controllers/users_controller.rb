@@ -20,7 +20,10 @@ class UsersController < ApplicationController
       if user.password_digest === params[:password]
         render json: user.to_json(serialized_data)
       else
-        render json: {message: 'user not found'}
+        render json: {
+          error: true,
+          message: "User or password incorrect!"
+        }, status: :unauthorized
       end
       # render json: user.to_json
       # if user.password_digest === params[:password]
@@ -29,7 +32,10 @@ class UsersController < ApplicationController
       # end
 
     else
-      render json: {message: 'user not found'}
+      render json: {
+        error: true,
+        message: "Invalid username"
+      }, status: :payment_required
     end
   end
   def serialized_data
