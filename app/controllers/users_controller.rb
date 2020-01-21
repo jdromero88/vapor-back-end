@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     user = User.find_by(username: params[:username])
     if user
       if user.password_digest === params[:password]
-        byebug
+        # byebug
         render json: user.to_json(serialized_data)
       else
         render json: {
