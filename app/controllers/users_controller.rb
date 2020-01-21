@@ -1,13 +1,16 @@
 class UsersController < ApplicationController
   def create
-    user = User.create(username: params[:username],
-      password_digest: params[:password_digest],
-      email: params[:email],
-      first_name: params[:first_name],
-      last_name: params[:last_name],
-      birthdate: params[:birthdate],
-      bio: params[:bio],
-      user_avatar: params[:user_avatar])
+    byebug
+    user = User.create(user_strong_params)
+    # user = User.create!(username: params[:username],
+    #   password: params[:password],
+    #   email: params[:email],
+    #   first_name: params[:first_name],
+    #   last_name: params[:last_name],
+    #   birthdate: params[:birthdate],
+    #   bio: params[:bio],
+    #   user_avatar: params[:user_avatar])
+    render json: user.to_json(serialized_data)
   end
   def index
     users = User.all
@@ -25,7 +28,7 @@ class UsersController < ApplicationController
     # byebug
     user = User.find_by(username: params[:username])
     if user
-      if user.password_digest === params[:password]
+      if user.authenticate(params[:password])
         # byebug
         render json: user.to_json(serialized_data)
       else
@@ -56,6 +59,20 @@ class UsersController < ApplicationController
       }
     }
   end
+
+  private
+    def user_strong_params
+      params.require(:newUser).permit(:username,
+        :password,
+        :email,
+        :first_name,
+        :last_name,
+        :birthdate,
+        :bio,
+        :user_avatar,
+        :user_games_attributes
+      )
+    end
 end
 
 # def serialized_data
