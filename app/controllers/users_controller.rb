@@ -13,11 +13,20 @@ class UsersController < ApplicationController
     users = User.all
     render json: users.to_json(serialized_data)
   end
+  def show
+    user = User.find(params[:id])
+    render json: user.to_json(serialized_data)
+  end
+  # def show_by_username
+  #   user = User.find_by(username: params[:username])
+  #   render json: user.to_json(serialized_data)
+  # end
   def login
     # byebug
     user = User.find_by(username: params[:username])
     if user
       if user.password_digest === params[:password]
+        byebug
         render json: user.to_json(serialized_data)
       else
         render json: {
@@ -79,6 +88,15 @@ end
 #   email: 'ryan@vapor.com',
 #   first_name: 'Ryan',
 #   last_name: 'Smith',
+#   birthdate: '01-02-1995',
+#   bio: 'Hello World - Vapor',
+#   user_avatar: 'https://pickaface.net/gallery/avatar/unr_ryan_170527_2027_2q2fmge.png')
+
+# chine = User.create(username: 'chine',
+#   password: 'chine',
+#   email: 'chine@vapor.com',
+#   first_name: 'Chine',
+#   last_name: 'Anikwe',
 #   birthdate: '01-02-1995',
 #   bio: 'Hello World - Vapor',
 #   user_avatar: 'https://pickaface.net/gallery/avatar/unr_ryan_170527_2027_2q2fmge.png')
