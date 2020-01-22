@@ -26,7 +26,7 @@ class UsersController < ApplicationController
       else
         render json: {
           error: true,
-          message: "User or password incorrect!"
+          message: "Incorrect User or password!"
         }, status: :unauthorized
       end
       # render json: user.to_json
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     else
       render json: {
         error: true,
-        message: "Invalid username"
+        message: "Incorrect User or password!"
       }, status: :payment_required
     end
   end
