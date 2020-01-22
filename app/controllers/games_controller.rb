@@ -5,8 +5,13 @@ class GamesController < ApplicationController
   end
   def create
     # byebug
-    game = Game.create(games_strong_params)
-    render json: game.to_json(serialized_data)
+    game = Game.find_by(api_id: params[:api_id])
+    if game
+      render json: game.to_json(serialized_data)
+    else
+      game = Game.create(games_strong_params)
+      render json: game.to_json(serialized_data)
+    end
   end
   def show
     game = Game.find(params[:id])

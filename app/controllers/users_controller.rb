@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def create
-    byebug
+    # byebug
     user = User.create(user_strong_params)
     render json: user.to_json(serialized_data)
   end
@@ -29,12 +29,6 @@ class UsersController < ApplicationController
           message: "Incorrect User or password!"
         }, status: :unauthorized
       end
-      # render json: user.to_json
-      # if user.password_digest === params[:password]
-      # else
-      #   render json: {message: 'user not found'}
-      # end
-
     else
       render json: {
         error: true,
