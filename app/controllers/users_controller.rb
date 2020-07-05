@@ -17,11 +17,10 @@ class UsersController < ApplicationController
   #   render json: user.to_json(serialized_data)
   # end
   def login
-    # byebug
+  
     user = User.find_by(username: params[:username])
     if user
       if user.authenticate(params[:password])
-        # byebug
         render json: user.to_json(serialized_data)
       else
         render json: {
